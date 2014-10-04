@@ -12,5 +12,8 @@
     <string name="password">密码</string>
     <string name="login_btn_label">登录</string>
     <string name="signup_text_label">注册</string>
+    <string name="title_activity_signup">SignupActivity</string>
+    <string name="email_text_label">邮箱</string>
+    <string name="signup_btn_label">注册</string>
 
 </resources>
