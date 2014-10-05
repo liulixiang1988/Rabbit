@@ -17,5 +17,7 @@
     <string name="signup_btn_label">注册</string>
     <string name="signup_error_message">用户名、密码和邮箱都需要填写</string>
     <string name="signup_error_title">信息不全哦</string>
+    <string name="login_error_message">用户名、密码都需要填写</string>
+    <string name="login_error_title">信息不全哦</string>
 
 </resources>
