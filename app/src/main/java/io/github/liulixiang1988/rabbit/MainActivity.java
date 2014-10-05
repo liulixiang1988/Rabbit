@@ -48,14 +48,7 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         if (currentUser != null) {
             Log.v(TAG, currentUser.getUsername());
         } else {
-            // show the signup or login screen
-            Intent intent = new Intent(this, LoginActivity.class);
-            //第1种方法
-            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            //第2种方法
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
+            navigateToLoginScreen();
         }
 
         // Set up the action bar.
@@ -107,7 +100,10 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
+            //登出
+            ParseUser.logOut();
+            navigateToLoginScreen();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -126,6 +122,17 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
 
     @Override
     public void onTabReselected(ActionBar.Tab tab, FragmentTransaction fragmentTransaction) {
+    }
+
+    public void navigateToLoginScreen(){
+        // show the signup or login screen
+        Intent intent = new Intent(this, LoginActivity.class);
+        //第1种方法
+        //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        //第2种方法
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     /**
