@@ -15,5 +15,7 @@
     <string name="title_activity_signup">SignupActivity</string>
     <string name="email_text_label">邮箱</string>
     <string name="signup_btn_label">注册</string>
+    <string name="signup_error_message">用户名、密码和邮箱都需要填写</string>
+    <string name="signup_error_title">信息不全哦</string>
 
 </resources>

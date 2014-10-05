@@ -22,7 +22,7 @@ public class LoginActivity extends Activity {
         txtSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(LoginActivity.this, SignupActivity.class);
+                Intent i = new Intent(LoginActivity.this, SignUpActivity.class);
                 startActivity(i);
             }
         });

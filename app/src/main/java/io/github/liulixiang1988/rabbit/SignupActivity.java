@@ -1,17 +1,50 @@
 package io.github.liulixiang1988.rabbit;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 
-public class SignupActivity extends Activity {
+public class SignUpActivity extends Activity {
 
+    protected EditText mUserName;
+    protected EditText mPassword;
+    protected EditText mEmail;
+    protected Button mSendBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        mUserName = (EditText) findViewById(R.id.usernameField);
+        mPassword = (EditText) findViewById(R.id.passwordField);
+        mEmail = (EditText) findViewById(R.id.emailField);
+        mSendBtn = (Button) findViewById(R.id.btnSignup);
+
+        mSendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = mUserName.getText().toString().trim();
+                String password = mPassword.getText().toString().trim();
+                String email = mEmail.getText().toString().trim();
+
+                if (username.isEmpty() || password.isEmpty() || email.isEmpty()){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
+                    builder.setTitle(R.string.signup_error_title)
+                            .setMessage(R.string.signup_error_message)
+                            .setPositiveButton(android.R.string.ok, null);
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
+                else{
+                    //todo: new user here
+                }
+            }
+        });
     }
 
 
