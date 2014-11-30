@@ -103,6 +103,10 @@ public class MainActivity extends Activity implements ActionBar.TabListener {
             navigateToLoginScreen();
             return true;
         }
+        if (id == R.id.action_edit_friends){
+            Intent i = new Intent(this, EditFriendsActivity.class);
+            startActivity(i);
+        }
         return super.onOptionsItemSelected(item);
     }
 

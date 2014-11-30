@@ -22,5 +22,7 @@
     <string name="menu_logout_label">退出</string>
     <string name="empty_inbox_label">没有新消息</string>
     <string name="empty_friends_label">目前还没有好友，快添加好友吧!</string>
+    <string name="menu_edit_friends_label">编辑好友</string>
+    <string name="title_activity_edit_friends">EditFriendsActivity</string>
 
 </resources>
