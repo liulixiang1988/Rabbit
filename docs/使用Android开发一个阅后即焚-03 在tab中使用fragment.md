@@ -184,3 +184,53 @@ public Fragment getItem(int position) {
 最后，运行如下：
 
 ![images](images/Snip20141104_1.png)
+
+##5 理解基于Fragment的代码的其他部分
+
+我们知道，创建一个Fragment程序分为以下几步：
+
+1. 在Activity中创建一个Fragment的容器（创建`SectionsPagerAdapter`，并且在`MainActivity`中添加了`SectionsPagerAdapter`实例）
+2. 创建Fragment的类和布局（创建`FriendsFragment`和`InboxFragment`和对应的xml）
+3. 在Activity中初始化Fragment（在`SectionsPagerAdapter`中的`getItem`中创建）
+4. 在Action Bar中添加tab
+5. 添加TabListener来加载新的Fragment
+
+我们已经做了步骤1、2、3，现在我们打开`MainActivity`来看看它的`onCreate`方法：
+
+```
+protected void onCreate(Bundle savedInstanceState) {
+    //...
+
+    // 设置Action Bar
+    final ActionBar actionBar = getActionBar();
+    actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+
+    // 设置返回fragment的adapter
+    mSectionsPagerAdapter = new SectionsPagerAdapter(this, getFragmentManager());
+
+    // 设置ViewPager
+    mViewPager = (ViewPager) findViewById(R.id.pager);
+    mViewPager.setAdapter(mSectionsPagerAdapter);
+
+    //在不同的区域滑动时，选择对应的tab，并且使用对应的ActionBar.Tab#select()来完成这些
+    mViewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+        @Override
+        public void onPageSelected(int position) {
+            actionBar.setSelectedNavigationItem(position);
+        }
+    });
+
+    // 对每一节，添加tab到action bar
+    for (int i = 0; i < mSectionsPagerAdapter.getCount(); i++) {
+        // Create a tab with text corresponding to the page title defined by
+        // the adapter. Also specify this Activity object, which implements
+        // the TabListener interface, as the callback (listener) for when
+        // this tab is selected.
+        actionBar.addTab(
+                actionBar.newTab()
+                        .setText(mSectionsPagerAdapter.getPageTitle(i))
+                        .setTabListener(this));
+    }
+}
+
+```
