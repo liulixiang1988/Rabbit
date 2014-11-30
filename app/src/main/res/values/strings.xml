@@ -24,5 +24,6 @@
     <string name="empty_friends_label">目前还没有好友，快添加好友吧!</string>
     <string name="menu_edit_friends_label">编辑好友</string>
     <string name="title_activity_edit_friends">EditFriendsActivity</string>
+    <string name="error_title">对不起！</string>
 
 </resources>

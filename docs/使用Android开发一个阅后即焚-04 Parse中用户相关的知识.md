@@ -104,11 +104,62 @@ public final class ParseConstant {
 }
 ```
 
-
-
 ##3 执行查询
 
+接上一节，我们在`EditFriendsActivity.onResume`中执行查询
+
+```
+protected void onResume() {
+    super.onResume();
+    ParseQuery<ParseUser> query = ParseUser.getQuery();
+    query.orderByAscending(ParseConstant.KEY_USERNAME);
+    query.setLimit(1000);
+    query.findInBackground(new FindCallback<ParseUser>() {
+        @Override
+        public void done(List<ParseUser> list, ParseException e) {
+            if (e == null){
+                mUsers = list;
+                String[] userNames = new String[mUsers.size()];
+                int i = 0;
+                for (ParseUser user : mUsers){
+                    userNames[i] = user.getUsername();
+                    i++;
+                }
+                ArrayAdapter<String> adapter =
+                        new ArrayAdapter<String>(EditFriendsActivity.this,
+                                android.R.layout.simple_list_item_checked,
+                                userNames);
+                setListAdapter(adapter);
+            }
+            else{
+                Log.e(TAG, e.getMessage());
+                AlertDialog.Builder builder = new AlertDialog.Builder(EditFriendsActivity.this);
+                builder.setTitle(R.string.error_title)
+                        .setMessage(e.getMessage())
+                        .setPositiveButton(android.R.string.ok, null);
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        }
+    });
+}
+```
+
+需要注意的是`ArrayAdapter`的用法和`AlertBuilder`的用法。
+
 ##4 从列表中选择好友
+
+当选中好友时，显示对号，这是通过设置ListView来实现的
+
+```
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_edit_friends);
+    getListView().setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+}
+```
+
+我们不仅需要显示一个对号，还需要把这种关系保存到后台。Parse提供了关系对象，下一节我们将学习关系对象。
 
 ##5 保存好友关系
 
