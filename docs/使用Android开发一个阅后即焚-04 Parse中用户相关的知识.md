@@ -83,6 +83,29 @@ public boolean onOptionsItemSelected(MenuItem item) {
 
 ##2 添加用户查询
 
+添加用户查询，为了能够使每次进入好友编辑页面时更新前1000位用户，我们在`EditFriendsActivity.onResume`中添加查询
+
+```
+public class EditFriendsActivity extends Activity {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.orderByAscending(ParseConstant.KEY_USERNAME);
+        query.setLimit(1000);
+    }
+}
+```
+为了防止我们出现打错字符，我们定义了一个`ParseConstant`类：
+
+```
+public final class ParseConstant {
+    public static final String KEY_USERNAME="username";
+}
+```
+
+
+
 ##3 执行查询
 
 ##4 从列表中选择好友
